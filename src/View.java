@@ -1,4 +1,4 @@
-package JavaFX11;
+//package JavaFX11;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class View {
 
@@ -80,6 +81,7 @@ public class View {
 		topGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		
 		//setup look and feel, fonts, alignment, etc
+		fixedCreditQuestionLabel.setFont(Font.font("What's your credit score?", FontWeight.BOLD, 20));
 		itemsComboBox.setPromptText("Select Credit Type");
 		carPriceTextField.setPromptText("5000");
 		tradeInDownPaymentTextField.setPromptText("4000");
@@ -119,8 +121,8 @@ public class View {
 		
 		
 		
-		topGrid.setPrefSize(700, 500);
-		root.setPrefSize(700, 500);
+		topGrid.setPrefSize(1700, 1500);
+		root.setPrefSize(1700, 1500);
 		BorderPane.setMargin(topGrid, new Insets(10, 10, 10, 10));
 		return root;
 	}

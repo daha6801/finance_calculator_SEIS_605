@@ -1,4 +1,4 @@
-package JavaFX11;
+//package JavaFX11;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,7 +13,7 @@ public class Model {
 	ObservableList<Info> infoObservableList = FXCollections.observableArrayList();
 	
 	void loadData() throws FileNotFoundException, IOException {
-		try (BufferedReader br = new BufferedReader (new FileReader("data/InfoData.csv"))) {
+		try (BufferedReader br = new BufferedReader (new FileReader("src/InfoData.csv"))) {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");

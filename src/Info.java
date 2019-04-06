@@ -1,4 +1,4 @@
-package JavaFX11;
+//package JavaFX11;
 
 public class Info {
 	String creditType;
