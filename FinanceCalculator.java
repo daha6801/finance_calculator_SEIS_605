@@ -1,6 +1,9 @@
 package JavaFX11;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -33,6 +36,37 @@ public class FinanceCalculator extends Application {
 				view.creditInfoLabel.setText(String.format("%s",newValue.creditInfo));
 			}
 		});
+		
+		//bind TextField with data
+		view.carPriceTextField.setText("500");
+		
+		//bind the textField data with monthly payment
+		DoubleBinding monthlyPaymentBinding = new DoubleBinding() {
+
+			{
+				super.bind( view.carPriceTextField.textProperty(), view.tradeInDownPaymentTextField.textProperty());
+			}
+			
+			@Override
+			protected double computeValue() {
+				//Double interestRateValue = view.interestRate.getValue();
+				//Integer noOfMonths = view.noOfMonths.getValue();
+				@SuppressWarnings("unchecked")
+				String carPrice =view.carPriceTextField.getText();
+				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
+				
+				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty()) {
+					double carPriceDouble = Double.parseDouble(carPrice);
+					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+					return carPriceDouble * tradeInDownPaymentDouble;
+				} else
+				return 0;
+			}
+						
+		};
+		
+		//bind bmiBinding to realtimeBMILable
+		view.monthlyPaymentAmountLabel.textProperty().bind(Bindings.format("%.2f", monthlyPaymentBinding));
 	}
 
 }
