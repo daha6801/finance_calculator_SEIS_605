@@ -3,7 +3,6 @@
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -44,21 +43,22 @@ public class FinanceCalculator extends Application {
 		DoubleBinding monthlyPaymentBinding = new DoubleBinding() {
 
 			{
-				super.bind( view.carPriceTextField.textProperty(), view.tradeInDownPaymentTextField.textProperty());
+				super.bind( view.carPriceTextField.textProperty(), view.tradeInDownPaymentTextField.textProperty(), view.interestRate.valueProperty(), view.noOfMonths.valueProperty() );
 			}
 			
 			@Override
 			protected double computeValue() {
-				//Double interestRateValue = view.interestRate.getValue();
-				//Integer noOfMonths = view.noOfMonths.getValue();
-				@SuppressWarnings("unchecked")
+
 				String carPrice =view.carPriceTextField.getText();
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
+				Double interestRatevalue = view.interestRate.getValue();
+				Integer noOfMonthsvalue = view.noOfMonths.getValue();
 				
-				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty()) {
+				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() && interestRatevalue >= 0.0 ) {
 					double carPriceDouble = Double.parseDouble(carPrice);
 					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
-					return carPriceDouble * tradeInDownPaymentDouble;
+					double noOfMonthsvalueDouble = Double.valueOf(noOfMonthsvalue);
+					return carPriceDouble * tradeInDownPaymentDouble * interestRatevalue * noOfMonthsvalueDouble;
 				} else
 				return 0;
 			}
