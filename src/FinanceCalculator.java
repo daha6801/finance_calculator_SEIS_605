@@ -1,5 +1,7 @@
 //package JavaFX11;
 
+import java.math.BigDecimal;
+
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
@@ -62,12 +64,28 @@ public class FinanceCalculator extends Application {
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
 				Double interestRatevalue = view.interestRate.getValue();
 				Integer noOfMonthsvalue = view.noOfMonths.getValue();
-				
-				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() && interestRatevalue >= 0.0 ) {
+
+
+				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty()) {
+
 					double carPriceDouble = Double.parseDouble(carPrice);
 					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
-					double noOfMonthsvalueDouble = Double.valueOf(noOfMonthsvalue);
-					return carPriceDouble * tradeInDownPaymentDouble * interestRatevalue * noOfMonthsvalueDouble;
+					double principle = 0;
+					double monthly_interest_rate = 0;
+					
+					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
+					
+						principle = (carPriceDouble - tradeInDownPaymentDouble);	
+						monthly_interest_rate = ((interestRatevalue/12)/100);
+															
+						
+					}
+
+					if (interestRatevalue == 0)
+					{
+						return principle/noOfMonthsvalue;
+					}
+					return principle * monthly_interest_rate * (Math.pow(1 + monthly_interest_rate, noOfMonthsvalue))/(Math.pow(1 + monthly_interest_rate, noOfMonthsvalue)-1);
 				} else
 				return 0;
 			}
@@ -91,12 +109,28 @@ public class FinanceCalculator extends Application {
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
 				Double interestRatevalue = view.interestRate.getValue();
 				Integer noOfMonthsvalue = view.noOfMonths.getValue();
-						
-				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() && interestRatevalue >= 0.0 ) {
+
+				
+				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() ) {
 					double carPriceDouble = Double.parseDouble(carPrice);
 					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
-					double noOfMonthsvalueDouble = Double.valueOf(noOfMonthsvalue);
-					return carPriceDouble * tradeInDownPaymentDouble * interestRatevalue * noOfMonthsvalueDouble;
+					double principle = 0;
+					double monthly_interest_rate = 0;
+					double monthly_payment = 0;
+					
+					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
+						principle = (carPriceDouble - tradeInDownPaymentDouble);	
+						monthly_interest_rate = ((interestRatevalue/12)/100);
+						
+					}
+					
+					if (interestRatevalue == 0)
+					{
+						monthly_payment =  principle/noOfMonthsvalue;
+						return monthly_payment * noOfMonthsvalue;
+					}
+					monthly_payment = principle * monthly_interest_rate * (Math.pow(1 + monthly_interest_rate, noOfMonthsvalue))/(Math.pow(1 + monthly_interest_rate, noOfMonthsvalue)-1);											
+					return monthly_payment * noOfMonthsvalue;
 				} else
 				return 0;
 			}
@@ -121,12 +155,31 @@ public class FinanceCalculator extends Application {
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
 				Double interestRatevalue = view.interestRate.getValue();
 				Integer noOfMonthsvalue = view.noOfMonths.getValue();
-								
-				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() && interestRatevalue >= 0.0 ) {
+				
+				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() ) {
+					
 					double carPriceDouble = Double.parseDouble(carPrice);
 					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
-					double noOfMonthsvalueDouble = Double.valueOf(noOfMonthsvalue);
-					return carPriceDouble * tradeInDownPaymentDouble * interestRatevalue * noOfMonthsvalueDouble;
+					double principle = 0;
+					double monthly_interest_rate = 0;
+					
+					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
+						principle = (carPriceDouble - tradeInDownPaymentDouble);	
+						monthly_interest_rate = ((interestRatevalue/12)/100);
+					}
+															
+					double monthly_payment;
+					if (interestRatevalue == 0)
+					{
+						monthly_payment =  principle/noOfMonthsvalue;
+					}
+					else {
+						monthly_payment = principle * monthly_interest_rate * (Math.pow(1 + monthly_interest_rate, noOfMonthsvalue))/(Math.pow(1 + monthly_interest_rate, noOfMonthsvalue)-1);
+					}
+					
+					double total_amount_paid = monthly_payment * noOfMonthsvalue;
+					return total_amount_paid - principle;
+					
 				} else
 				return 0;
 			}
