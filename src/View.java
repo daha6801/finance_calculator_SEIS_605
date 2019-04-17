@@ -96,7 +96,7 @@ public class View {
 		topGrid.add(interestRate, 0, 13);
 		topGrid.add(interestRateTextLabel, 0, 14);
 		
-		IntegerSpinnerValueFactory spinnerFactoryMonths = new IntegerSpinnerValueFactory(4,42,36); //Figure out how to take user input
+		IntegerSpinnerValueFactory spinnerFactoryMonths = new IntegerSpinnerValueFactory(0,84,36); //Figure out how to take user input
 		
 		topGrid.add(months, 0, 16);
 		noOfMonths.setValueFactory(spinnerFactoryMonths);
