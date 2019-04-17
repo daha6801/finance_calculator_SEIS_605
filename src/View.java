@@ -81,11 +81,16 @@ public class View {
 		topGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		
 		//setup look and feel, fonts, alignment, etc
-		fixedCreditQuestionLabel.setFont(Font.font("What's your credit score?", FontWeight.BOLD, 20));
+		fixedCreditQuestionLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
+		fixedCreditQuestionLabel.setTextFill(Color.BLACK);
+		carPriceLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
+		carPriceLabel.setTextFill(Color.BLACK);
+		afterNegotiations.setFont(Font.font("sans-serif", FontWeight.BOLD, 10));
+		afterNegotiations.setTextFill(Color.BLACK);
 		itemsComboBox.setPromptText("Select Credit Type");
 		carPriceTextField.setPromptText("5000");
 		tradeInDownPaymentTextField.setPromptText("4000");
-		creditInfoLabel.setTextFill(Color.TEAL);
+		creditInfoLabel.setTextFill(Color.BLACK);
 		creditInfoLabel.setFont(Font.font(15));
 		
 		
