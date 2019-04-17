@@ -1,4 +1,4 @@
-//package JavaFX11;
+package JavaFX11;
 
 import java.math.BigDecimal;
 
@@ -97,42 +97,41 @@ public class FinanceCalculator extends Application {
 						
 		//bind the textField data with total amount paid
 		DoubleBinding totalAmountPaidBinding = new DoubleBinding() {
-
+			
 			{
-				super.bind( view.carPriceTextField.textProperty(), view.tradeInDownPaymentTextField.textProperty(), view.interestRate.valueProperty(), view.noOfMonths.valueProperty() );
+				super.bind(view.noOfMonths.valueProperty(), view.monthlyPaymentAmountLabel.textProperty());
 			}
-					
 			@Override
 			protected double computeValue() {
 
-				String carPrice =view.carPriceTextField.getText();
-				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
-				Double interestRatevalue = view.interestRate.getValue();
-				Integer noOfMonthsvalue = view.noOfMonths.getValue();
+					Integer noOfMonthsvalue = view.noOfMonths.getValue();
+					String monthly_payment = view.monthlyPaymentAmountLabel.getText();
+					double monthly_payment_double = Double.parseDouble(monthly_payment);
+					Double interestRatevalue = view.interestRate.getValue();
 
-				
-				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() ) {
-					double carPriceDouble = Double.parseDouble(carPrice);
-					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
-					double principle = 0;
-					double monthly_interest_rate = 0;
-					double monthly_payment = 0;
+					String carPrice =view.carPriceTextField.getText();
+					String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
 					
-					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
-						principle = (carPriceDouble - tradeInDownPaymentDouble);	
-						monthly_interest_rate = ((interestRatevalue/12)/100);
+					double total_interest_paid = 0;
+					
+					if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() ) {
 						
+						double carPriceDouble = Double.parseDouble(carPrice);
+						double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+						double principle = 0;
+						
+						if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
+							principle = (carPriceDouble - tradeInDownPaymentDouble);	
+						}												
+						total_interest_paid = (monthly_payment_double * noOfMonthsvalue) - principle;
 					}
 					
 					if (interestRatevalue == 0)
 					{
-						monthly_payment =  principle/noOfMonthsvalue;
-						return monthly_payment * noOfMonthsvalue;
+						return monthly_payment_double * noOfMonthsvalue - total_interest_paid;
 					}
-					monthly_payment = principle * monthly_interest_rate * (Math.pow(1 + monthly_interest_rate, noOfMonthsvalue))/(Math.pow(1 + monthly_interest_rate, noOfMonthsvalue)-1);											
-					return monthly_payment * noOfMonthsvalue;
-				} else
-				return 0;
+					return monthly_payment_double * noOfMonthsvalue;
+
 			}
 								
 		};
@@ -143,52 +142,36 @@ public class FinanceCalculator extends Application {
 								
 		//bind the textField data with total interest paid
 		DoubleBinding totalInterestPaidBinding = new DoubleBinding() {
-
+				
 			{
-				super.bind( view.carPriceTextField.textProperty(), view.tradeInDownPaymentTextField.textProperty(), view.interestRate.valueProperty(), view.noOfMonths.valueProperty() );
+				super.bind(view.carPriceTextField.textProperty(), view.tradeInDownPaymentTextField.textProperty(), view.totalAmountLabel.textProperty());
 			}
-							
 			@Override
 			protected double computeValue() {
 
 				String carPrice =view.carPriceTextField.getText();
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
-				Double interestRatevalue = view.interestRate.getValue();
-				Integer noOfMonthsvalue = view.noOfMonths.getValue();
+				String total_amount_paid = view.totalAmountLabel.getText();
+				double total_amount_paid_double = Double.parseDouble(total_amount_paid);
+				double principle = 0;
 				
 				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() ) {
 					
 					double carPriceDouble = Double.parseDouble(carPrice);
 					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
-					double principle = 0;
-					double monthly_interest_rate = 0;
+					
 					
 					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
 						principle = (carPriceDouble - tradeInDownPaymentDouble);	
-						monthly_interest_rate = ((interestRatevalue/12)/100);
-					}
-															
-					double monthly_payment;
-					if (interestRatevalue == 0)
-					{
-						monthly_payment =  principle/noOfMonthsvalue;
-					}
-					else {
-						monthly_payment = principle * monthly_interest_rate * (Math.pow(1 + monthly_interest_rate, noOfMonthsvalue))/(Math.pow(1 + monthly_interest_rate, noOfMonthsvalue)-1);
-					}
+					}												
 					
-					double total_amount_paid = monthly_payment * noOfMonthsvalue;
-					return total_amount_paid - principle;
-					
-				} else
-				return 0;
+				}
+				return total_amount_paid_double - principle;
 			}
 										
 		};
-				
+		
 		//bind totalAmountPaidBinding to realtimeBMILable
-		view.totalInterestLabel.textProperty().bind(Bindings.format("%.2f", totalInterestPaidBinding));				
-			
+		view.totalInterestLabel.textProperty().bind(Bindings.format("%.2f", totalInterestPaidBinding));			
 	}
-
 }
