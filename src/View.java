@@ -77,11 +77,12 @@ public class View {
 
 		
 
-		topGrid.getRowConstraints().add(new RowConstraints(20));
+		topGrid.getRowConstraints().add(new RowConstraints(80));
 		topGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		
 		//setup look and feel, fonts, alignment, etc
 		fixedCreditQuestionLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
+		creditInfoLabel.setWrapText(true);
 		fixedCreditQuestionLabel.setTextFill(Color.BLACK);
 		carPriceLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		carPriceLabel.setTextFill(Color.BLACK);
@@ -111,23 +112,23 @@ public class View {
 		
 		
 		//Add controls to Grid Column
-		topGrid.add(monthlyPaymentLabel, 1, 1);
-		topGrid.add(monthlyPaymentAmountLabel, 1, 2);
-		topGrid.add(monthlyPaymentTextLabel, 1, 3);
+		topGrid.add(monthlyPaymentLabel, 9, 1);
+		topGrid.add(monthlyPaymentAmountLabel, 9, 2);
+		topGrid.add(monthlyPaymentTextLabel, 9, 3);
 		
-		topGrid.add(totalAmountPaidLabel, 1, 5);
-		topGrid.add(totalAmountLabel, 1, 6);
-		topGrid.add(totalAmountTextLabel, 1, 7);
-		
-		
-		topGrid.add(totalInterestPaidLabel, 1, 9);
-		topGrid.add(totalInterestLabel, 1, 10);
+		topGrid.add(totalAmountPaidLabel, 9, 5);
+		topGrid.add(totalAmountLabel, 9, 6);
+		topGrid.add(totalAmountTextLabel, 9, 7);
 		
 		
+		topGrid.add(totalInterestPaidLabel, 9, 9);
+		topGrid.add(totalInterestLabel, 9, 10);
 		
 		
-		topGrid.setPrefSize(1700, 1500);
-		root.setPrefSize(1700, 1500);
+		
+		
+		topGrid.setPrefSize(8700, 5500);
+		root.setPrefSize(8700, 5500);
 		BorderPane.setMargin(topGrid, new Insets(10, 10, 10, 10));
 		return root;
 	}
