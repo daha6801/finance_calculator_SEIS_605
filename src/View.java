@@ -41,6 +41,7 @@ public class View {
 	Label monthsLabel = new Label("Suggested max: 36 months for used cars, 60 for new");
 	
 	//interestRate.setEditable(false);
+	Label pymtDetailsLabel = new Label("Payment details");
 	Label monthlyPaymentLabel = new Label("Monthly payment");
 	Label monthlyPaymentAmountLabel = new Label("$475.95");
 	Label monthlyPaymentTextLabel = new Label("(Before taxes & fees)");
@@ -67,17 +68,17 @@ public class View {
 		
 
 		topGrid.add(title, 0, 0);
-		topGrid.add(fixedCreditQuestionLabel, 0, 2);
-		topGrid.add(itemsComboBox, 0, 3);
-		topGrid.add(creditInfoLabel, 0, 4);
+		topGrid.add(fixedCreditQuestionLabel, 0, 1);
+		topGrid.add(itemsComboBox, 0, 2);
+		topGrid.add(creditInfoLabel, 0, 3);
 		
-		topGrid.add(carPriceLabel, 0, 6);
-		topGrid.add(carPriceTextField, 0, 7);
-		topGrid.add(afterNegotiations, 0, 8);
+		topGrid.add(carPriceLabel, 0, 4);
+		topGrid.add(carPriceTextField, 0, 5);
+		topGrid.add(afterNegotiations, 0, 6);
 		
-		topGrid.add(tradeInDownPaymentLabel, 0, 10);
-		topGrid.add(tradeInDownPaymentTextField, 0, 11);
-		topGrid.add(tradeInDownPaymentTextLabel, 0, 12);
+		topGrid.add(tradeInDownPaymentLabel, 0, 7);
+		topGrid.add(tradeInDownPaymentTextField, 0, 8);
+		topGrid.add(tradeInDownPaymentTextLabel, 0, 9);
 		
 
 		
@@ -103,9 +104,11 @@ public class View {
 		tradeInDownPaymentTextField.setPromptText("4000");
 		creditInfoLabel.setTextFill(Color.BLACK);
 		creditInfoLabel.setFont(Font.font(15));
+		pymtDetailsLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		
 		
 		DoubleSpinnerValueFactory spinnerFactory = new DoubleSpinnerValueFactory(0,100,4.5); //Figure out how to take user input
+		
 		
 		topGrid.add(interestRateLabel, 0, 12);
 		interestRate.setValueFactory(spinnerFactory);
@@ -122,17 +125,18 @@ public class View {
 		
 		
 		//Add controls to Grid Column
-		topGrid.add(monthlyPaymentLabel, 6, 1);
-		topGrid.add(monthlyPaymentAmountLabel, 6, 2);
-		topGrid.add(monthlyPaymentTextLabel, 6, 3);
+		topGrid.add(pymtDetailsLabel, 9, 1);
+		topGrid.add(monthlyPaymentLabel, 9, 2);
+		topGrid.add(monthlyPaymentAmountLabel, 9, 3);
+		topGrid.add(monthlyPaymentTextLabel, 9, 4);
 		
-		topGrid.add(totalAmountPaidLabel, 6, 5);
-		topGrid.add(totalAmountLabel, 6, 6);
-		topGrid.add(totalAmountTextLabel, 6, 7);
+		topGrid.add(totalAmountPaidLabel, 9, 5);
+		topGrid.add(totalAmountLabel, 9, 6);
+		topGrid.add(totalAmountTextLabel, 9, 7);
 		
 		
-		topGrid.add(totalInterestPaidLabel, 6, 9);
-		topGrid.add(totalInterestLabel, 6, 10);
+		topGrid.add(totalInterestPaidLabel, 9, 9);
+		topGrid.add(totalInterestLabel, 9, 10);
 		
 		
 		
