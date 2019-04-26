@@ -1,6 +1,7 @@
 //package JavaFX11;
 
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -19,6 +20,8 @@ public class View {
 
 	ComboBox<Info> itemsComboBox = new ComboBox<>(); //the drop down will show the item-names from csv file
 	
+	
+	Label title = new Label("Car payment calculator");
 	Label creditInfoLabel = new Label();
 	Label fixedCreditQuestionLabel = new Label("What's your credit score?");
 	Label carPriceLabel = new Label("Car price ($)");
@@ -61,18 +64,20 @@ public class View {
 		topGrid.setHgap(10);
 		
 		//add controls to topGrid
+		
 
-		topGrid.add(fixedCreditQuestionLabel, 0, 0);
-		topGrid.add(itemsComboBox, 0, 1);
-		topGrid.add(creditInfoLabel, 0, 2);
+		topGrid.add(title, 0, 0);
+		topGrid.add(fixedCreditQuestionLabel, 0, 2);
+		topGrid.add(itemsComboBox, 0, 3);
+		topGrid.add(creditInfoLabel, 0, 4);
 		
-		topGrid.add(carPriceLabel, 0, 4);
-		topGrid.add(carPriceTextField, 0, 5);
-		topGrid.add(afterNegotiations, 0, 6);
+		topGrid.add(carPriceLabel, 0, 6);
+		topGrid.add(carPriceTextField, 0, 7);
+		topGrid.add(afterNegotiations, 0, 8);
 		
-		topGrid.add(tradeInDownPaymentLabel, 0, 8);
-		topGrid.add(tradeInDownPaymentTextField, 0, 9);
-		topGrid.add(tradeInDownPaymentTextLabel, 0, 10);
+		topGrid.add(tradeInDownPaymentLabel, 0, 10);
+		topGrid.add(tradeInDownPaymentTextField, 0, 11);
+		topGrid.add(tradeInDownPaymentTextLabel, 0, 12);
 		
 
 		
@@ -81,6 +86,11 @@ public class View {
 		topGrid.getColumnConstraints().add(new ColumnConstraints(500));
 		
 		//setup look and feel, fonts, alignment, etc
+		
+	
+		
+		root.setStyle("-fx-border-style: solid none none none; -fx-border-width: 5; -fx-border-color: green;");
+		title.setFont(Font.font("sans-serif", FontWeight.BOLD, 34));
 		fixedCreditQuestionLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		creditInfoLabel.setWrapText(true);
 		fixedCreditQuestionLabel.setTextFill(Color.BLACK);
@@ -112,23 +122,23 @@ public class View {
 		
 		
 		//Add controls to Grid Column
-		topGrid.add(monthlyPaymentLabel, 9, 1);
-		topGrid.add(monthlyPaymentAmountLabel, 9, 2);
-		topGrid.add(monthlyPaymentTextLabel, 9, 3);
+		topGrid.add(monthlyPaymentLabel, 6, 1);
+		topGrid.add(monthlyPaymentAmountLabel, 6, 2);
+		topGrid.add(monthlyPaymentTextLabel, 6, 3);
 		
-		topGrid.add(totalAmountPaidLabel, 9, 5);
-		topGrid.add(totalAmountLabel, 9, 6);
-		topGrid.add(totalAmountTextLabel, 9, 7);
-		
-		
-		topGrid.add(totalInterestPaidLabel, 9, 9);
-		topGrid.add(totalInterestLabel, 9, 10);
+		topGrid.add(totalAmountPaidLabel, 6, 5);
+		topGrid.add(totalAmountLabel, 6, 6);
+		topGrid.add(totalAmountTextLabel, 6, 7);
 		
 		
+		topGrid.add(totalInterestPaidLabel, 6, 9);
+		topGrid.add(totalInterestLabel, 6, 10);
 		
 		
-		topGrid.setPrefSize(8700, 5500);
-		root.setPrefSize(8700, 5500);
+		
+		
+		topGrid.setPrefSize(1000, 500);
+		root.setPrefSize(1000, 500);
 		BorderPane.setMargin(topGrid, new Insets(10, 10, 10, 10));
 		return root;
 	}
