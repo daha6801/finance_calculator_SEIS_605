@@ -72,13 +72,13 @@ public class View {
 		topGrid.add(itemsComboBox, 0, 2);
 		topGrid.add(creditInfoLabel, 0, 3);
 		
-		topGrid.add(carPriceLabel, 0, 4);
-		topGrid.add(carPriceTextField, 0, 5);
-		topGrid.add(afterNegotiations, 0, 6);
+		topGrid.add(carPriceLabel, 0, 5);
+		topGrid.add(carPriceTextField, 0, 6);
+		topGrid.add(afterNegotiations, 0, 7);
 		
-		topGrid.add(tradeInDownPaymentLabel, 0, 7);
-		topGrid.add(tradeInDownPaymentTextField, 0, 8);
-		topGrid.add(tradeInDownPaymentTextLabel, 0, 9);
+		topGrid.add(tradeInDownPaymentLabel, 0, 9);
+		topGrid.add(tradeInDownPaymentTextField, 0, 10);
+		topGrid.add(tradeInDownPaymentTextLabel, 0, 11);
 		
 
 		
@@ -97,6 +97,7 @@ public class View {
 		fixedCreditQuestionLabel.setTextFill(Color.BLACK);
 		carPriceLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		carPriceLabel.setTextFill(Color.BLACK);
+		carPriceTextField.setMaxWidth(400);
 		afterNegotiations.setFont(Font.font("sans-serif", FontWeight.BOLD, 10));
 		afterNegotiations.setTextFill(Color.BLACK);
 		itemsComboBox.setPromptText("Select Credit Type");
@@ -104,7 +105,7 @@ public class View {
 		tradeInDownPaymentTextField.setPromptText("4000");
 		creditInfoLabel.setTextFill(Color.BLACK);
 		creditInfoLabel.setFont(Font.font(15));
-		pymtDetailsLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
+		pymtDetailsLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 17));
 		
 		
 		DoubleSpinnerValueFactory spinnerFactory = new DoubleSpinnerValueFactory(0,100,4.5); //Figure out how to take user input
@@ -125,18 +126,18 @@ public class View {
 		
 		
 		//Add controls to Grid Column
-		topGrid.add(pymtDetailsLabel, 9, 1);
-		topGrid.add(monthlyPaymentLabel, 9, 2);
-		topGrid.add(monthlyPaymentAmountLabel, 9, 3);
-		topGrid.add(monthlyPaymentTextLabel, 9, 4);
+		topGrid.add(pymtDetailsLabel, 4, 1);
+		topGrid.add(monthlyPaymentLabel, 4, 2);
+		topGrid.add(monthlyPaymentAmountLabel, 4, 3);
+		topGrid.add(monthlyPaymentTextLabel, 4, 4);
 		
-		topGrid.add(totalAmountPaidLabel, 9, 5);
-		topGrid.add(totalAmountLabel, 9, 6);
-		topGrid.add(totalAmountTextLabel, 9, 7);
+		topGrid.add(totalAmountPaidLabel, 4, 5);
+		topGrid.add(totalAmountLabel, 4, 6);
+		topGrid.add(totalAmountTextLabel, 4, 7);
 		
 		
-		topGrid.add(totalInterestPaidLabel, 9, 9);
-		topGrid.add(totalInterestLabel, 9, 10);
+		topGrid.add(totalInterestPaidLabel, 4, 9);
+		topGrid.add(totalInterestLabel, 4, 10);
 		
 		
 		
