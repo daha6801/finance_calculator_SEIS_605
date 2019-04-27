@@ -91,59 +91,67 @@ public class View {
 	
 		
 		root.setStyle("-fx-border-style: solid none none none; -fx-border-width: 5; -fx-border-color: green;");
-		title.setFont(Font.font("sans-serif", FontWeight.BOLD, 34));
+		title.setFont(Font.font("sans-serif", FontWeight.EXTRA_BOLD, 34));
 		fixedCreditQuestionLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		creditInfoLabel.setWrapText(true);
 		fixedCreditQuestionLabel.setTextFill(Color.BLACK);
 		carPriceLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		carPriceLabel.setTextFill(Color.BLACK);
 		carPriceTextField.setMaxWidth(400);
-		afterNegotiations.setFont(Font.font("sans-serif", FontWeight.BOLD, 10));
 		afterNegotiations.setTextFill(Color.BLACK);
 		itemsComboBox.setPromptText("Select Credit Type");
 		carPriceTextField.setPromptText("5000");
 		tradeInDownPaymentTextField.setPromptText("4000");
+		tradeInDownPaymentTextField.setMaxWidth(400);
+		tradeInDownPaymentLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		creditInfoLabel.setTextFill(Color.BLACK);
 		creditInfoLabel.setFont(Font.font(15));
 		pymtDetailsLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 17));
 		
 		
 		DoubleSpinnerValueFactory spinnerFactory = new DoubleSpinnerValueFactory(0,100,4.5); //Figure out how to take user input
+		spinnerFactory.setMax(400);
 		
-		
-		topGrid.add(interestRateLabel, 0, 12);
+		topGrid.add(interestRateLabel, 0, 13);
+		interestRateLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		interestRate.setValueFactory(spinnerFactory);
-		topGrid.add(interestRate, 0, 13);
-		topGrid.add(interestRateTextLabel, 0, 14);
+		topGrid.add(interestRate, 0, 14);
+		interestRate.setMaxWidth(400);
+		topGrid.add(interestRateTextLabel, 0, 15);
 		
 		IntegerSpinnerValueFactory spinnerFactoryMonths = new IntegerSpinnerValueFactory(0,84,36); //Figure out how to take user input
 		
-		topGrid.add(months, 0, 16);
+		topGrid.add(months, 0, 17);
+		months.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		noOfMonths.setValueFactory(spinnerFactoryMonths);
-		topGrid.add(noOfMonths, 0, 17);
-		topGrid.add(monthsLabel, 0, 18);
+		topGrid.add(noOfMonths, 0, 18);
+		noOfMonths.setMaxWidth(400);
+		topGrid.add(monthsLabel, 0, 19);
 		
 		
 		
 		//Add controls to Grid Column
 		topGrid.add(pymtDetailsLabel, 4, 1);
 		topGrid.add(monthlyPaymentLabel, 4, 2);
+		monthlyPaymentLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		topGrid.add(monthlyPaymentAmountLabel, 4, 3);
 		topGrid.add(monthlyPaymentTextLabel, 4, 4);
 		
-		topGrid.add(totalAmountPaidLabel, 4, 5);
-		topGrid.add(totalAmountLabel, 4, 6);
-		topGrid.add(totalAmountTextLabel, 4, 7);
+		topGrid.add(totalAmountPaidLabel, 4, 6);
+		totalAmountPaidLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
+		topGrid.add(totalAmountLabel, 4, 7);
+		topGrid.add(totalAmountTextLabel, 4, 9);
 		
 		
-		topGrid.add(totalInterestPaidLabel, 4, 9);
-		topGrid.add(totalInterestLabel, 4, 10);
+		topGrid.add(totalInterestPaidLabel, 4, 11 );
+		totalInterestPaidLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
+		topGrid.add(totalInterestLabel, 4, 12);
 		
 		
 		
 		
-		topGrid.setPrefSize(1000, 500);
-		root.setPrefSize(1000, 500);
+		topGrid.setPrefSize(1000, 1500);
+		root.setPrefSize(1000, 1500);
 		BorderPane.setMargin(topGrid, new Insets(10, 10, 10, 10));
 		return root;
 	}

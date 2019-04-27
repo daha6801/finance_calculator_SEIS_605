@@ -21,7 +21,7 @@ public class FinanceCalculator extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		model.loadData(); //this will load the data from .csv file
-		Scene scene = new Scene(view.setupScene(), 800, 600);
+		Scene scene = new Scene(view.setupScene(), 800, 700);
 		setupActions();
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Finance Calculator");
