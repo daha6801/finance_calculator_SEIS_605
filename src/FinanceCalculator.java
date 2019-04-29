@@ -1,4 +1,4 @@
-package JavaFX11;
+//package JavaFX11;
 
 import java.math.BigDecimal;
 
@@ -44,7 +44,7 @@ public class FinanceCalculator extends Application {
 			}
 		});
 		
-		//bing the tradeInDownPaymentTextField with data
+		//bind the tradeInDownPaymentTextField with data
 		view.tradeInDownPaymentTextField.setText("4000");
 		
 		//bind TextField with data
@@ -79,7 +79,7 @@ public class FinanceCalculator extends Application {
 						monthly_interest_rate = ((interestRatevalue/12)/100);
 															
 						
-					}
+					} 
 
 					if (interestRatevalue == 0)
 					{
@@ -139,7 +139,35 @@ public class FinanceCalculator extends Application {
 		//bind totalAmountPaidBinding to totalAmountLabel
 		view.totalAmountLabel.textProperty().bind(Bindings.format("%.2f", totalAmountPaidBinding));
 
+				
+		//bind data with the lastMonthPaymentAmountLable field
+		view.lastMonthPaymentAmountLabel.setText("0.00");
+		DoubleBinding lastMonthPaymentBinding = new DoubleBinding() {
+
+			{
+				super.bind( view.monthlyPaymentAmountLabel.textProperty(), view.totalAmountLabel.textProperty(), view.noOfMonths.valueProperty());
+			}
+					
+			@Override
+			protected double computeValue() {
+
+				Integer noOfMonthsvalue = view.noOfMonths.getValue();
+
+				String total_amount_paid = view.totalAmountLabel.getText();
+				double total_amount_paid_double = Double.parseDouble(total_amount_paid);
+				
+				String monthly_payment = view.monthlyPaymentAmountLabel.getText();
+				double monthly_payment_double = Double.parseDouble(monthly_payment);
+
+				return total_amount_paid_double - monthly_payment_double * (noOfMonthsvalue -1);
+
+			}
 								
+		};
+			
+		//bind lastMonthPaymentAmountLable to last months payment data
+		view.lastMonthPaymentAmountLabel.textProperty().bind(Bindings.format("%.2f", lastMonthPaymentBinding));
+				
 		//bind the textField data with total interest paid
 		DoubleBinding totalInterestPaidBinding = new DoubleBinding() {
 				

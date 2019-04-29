@@ -1,11 +1,15 @@
 //package JavaFX11;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
+import javafx.scene.control.SpinnerValueFactory.ListSpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -14,6 +18,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.StringConverter;
 
 public class View {
 
@@ -37,10 +42,13 @@ public class View {
 	Spinner<Integer> noOfMonths = new Spinner<>();
 	Label monthsLabel = new Label("Suggested max: 36 months for used cars, 60 for new");
 	
-	//interestRate.setEditable(false);
 	Label monthlyPaymentLabel = new Label("Monthly payment");
 	Label monthlyPaymentAmountLabel = new Label("$475.95");
 	Label monthlyPaymentTextLabel = new Label("(Before taxes & fees)");
+	
+	Label lastMonthPaymentLabel = new Label("Last Month's payment");
+	Label lastMonthPaymentAmountLabel = new Label("$0.0");
+
 	
 	Label totalAmountPaidLabel = new Label("Total amount paid");
 	Label totalAmountLabel = new Label("$17,134.20");
@@ -85,7 +93,6 @@ public class View {
 		fixedCreditQuestionLabel.setTextFill(Color.BLACK);
 		carPriceLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		carPriceLabel.setTextFill(Color.BLACK);
-		afterNegotiations.setFont(Font.font("sans-serif", FontWeight.BOLD, 10));
 		afterNegotiations.setTextFill(Color.BLACK);
 		itemsComboBox.setPromptText("Select Credit Type");
 		carPriceTextField.setPromptText("5000");
@@ -98,6 +105,8 @@ public class View {
 		
 		topGrid.add(interestRateLabel, 0, 12);
 		interestRate.setValueFactory(spinnerFactory);
+		interestRate.setEditable(true);
+	
 		topGrid.add(interestRate, 0, 13);
 		topGrid.add(interestRateTextLabel, 0, 14);
 		
@@ -115,13 +124,16 @@ public class View {
 		topGrid.add(monthlyPaymentAmountLabel, 1, 2);
 		topGrid.add(monthlyPaymentTextLabel, 1, 3);
 		
-		topGrid.add(totalAmountPaidLabel, 1, 5);
-		topGrid.add(totalAmountLabel, 1, 6);
-		topGrid.add(totalAmountTextLabel, 1, 7);
+		topGrid. add(lastMonthPaymentLabel, 1, 5);
+		topGrid.add(lastMonthPaymentAmountLabel, 1, 6);
+		
+		topGrid.add(totalAmountPaidLabel, 1, 8);
+		topGrid.add(totalAmountLabel, 1, 9);
+		topGrid.add(totalAmountTextLabel, 1, 10);
 		
 		
-		topGrid.add(totalInterestPaidLabel, 1, 9);
-		topGrid.add(totalInterestLabel, 1, 10);
+		topGrid.add(totalInterestPaidLabel, 1, 12);
+		topGrid.add(totalInterestLabel, 1, 13);
 		
 		
 		
