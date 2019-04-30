@@ -150,13 +150,16 @@ public class View {
 
 		topGrid. add(lastMonthPaymentLabel, 1, 6);
 		topGrid.add(lastMonthPaymentAmountLabel, 1, 7);
+		lastMonthPaymentLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		
 		topGrid.add(totalAmountPaidLabel, 1, 9);
+		totalAmountPaidLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		topGrid.add(totalAmountLabel, 1, 10);
 		topGrid.add(totalAmountTextLabel, 1, 11);
 		
 		
 		topGrid.add(totalInterestPaidLabel, 1, 13);
+		totalInterestPaidLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
 		topGrid.add(totalInterestLabel, 1, 14);
 
 		

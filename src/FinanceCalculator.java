@@ -23,12 +23,46 @@ public class FinanceCalculator extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		model.loadData(); //this will load the data from .csv file
-		Scene scene = new Scene(view.setupScene(), 800, 1000);
+		Scene scene = new Scene(view.setupScene(), 800, 700);
 		setupActions();
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Finance Calculator");
 		primaryStage.show();
 	}
+	
+	public boolean numberCheck(String input) {  
+	    final String Digits = "(\\p{Digit}+)";
+	    final String HexDigits = "(\\p{XDigit}+)";
+	  // an exponent is 'e' or 'E' followed by an optionally
+	  // signed decimal integer.
+	    final String Exp = "[eE][+-]?" + Digits;
+	    final String fpRegex =
+	          ("[\\x00-\\x20]*" +  // Optional leading "whitespace"
+	                  "[+-]?(" + // Optional sign character
+	                  "NaN|" +           // "NaN" string
+	                  "Infinity|" +      // "Infinity" string
+
+	                  // Digits ._opt Digits_opt ExponentPart_opt FloatTypeSuffix_opt
+	                  "(((" + Digits + "(\\.)?(" + Digits + "?)(" + Exp + ")?)|" +
+
+	                  // . Digits ExponentPart_opt FloatTypeSuffix_opt
+	                  "(\\.(" + Digits + ")(" + Exp + ")?)|" +
+
+	                  // Hexadecimal strings
+	                  "((" +
+	                  // 0[xX] HexDigits ._opt BinaryExponent FloatTypeSuffix_opt
+	                  "(0[xX]" + HexDigits + "(\\.)?)|" +
+
+	                  // 0[xX] HexDigits_opt . HexDigits BinaryExponent FloatTypeSuffix_opt
+	                  "(0[xX]" + HexDigits + "?(\\.)" + HexDigits + ")" +
+
+	                  ")[pP][+-]?" + Digits + "))" +
+	                  "[fFdD]?))" +
+	                  "[\\x00-\\x20]*");// Optional trailing "whitespace"
+
+	    return Pattern.matches(fpRegex, input);
+		
+   }
 
 	void setupActions() {
 		
@@ -67,6 +101,7 @@ public class FinanceCalculator extends Application {
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
 				Double interestRatevalue = view.interestRate.getValue();
 				Integer noOfMonthsvalue = view.noOfMonths.getValue();
+
 				double carPriceDouble = 0.00;
 				double  tradeInDownPaymentDouble = 0.00;
 				
@@ -92,12 +127,21 @@ public class FinanceCalculator extends Application {
 					{
 						return principle/noOfMonthsvalue;
 					}
+					if(numberCheck(carPrice))
+					{
+						view.carPriceTextField.setEditable(false); 
+					}
 					return principle * monthly_interest_rate * (Math.pow(1 + monthly_interest_rate, noOfMonthsvalue))/(Math.pow(1 + monthly_interest_rate, noOfMonthsvalue)-1);
 				} else
 				return 0;
-			}
+				
+				
 						
+		  }
+			
 		};
+		
+		
 		
 		//bind monthlyPaymentBinding to monthlyPaymentAmountLabel
 		view.monthlyPaymentAmountLabel.textProperty().bind(Bindings.format("%.2f", monthlyPaymentBinding));
