@@ -93,7 +93,6 @@ public class View {
 		
 		//setup look and feel, fonts, alignment, etc
 		
-	
 		
 		root.setStyle("-fx-border-style: solid none none none; -fx-border-width: 5; -fx-border-color: green;");
 		title.setFont(Font.font("sans-serif", FontWeight.EXTRA_BOLD, 34));
@@ -120,13 +119,12 @@ public class View {
 		
 		topGrid.add(interestRateLabel, 0, 13);
 		interestRateLabel.setFont(Font.font("sans-serif", FontWeight.BOLD, 14));
+
+			
 		interestRate.setValueFactory(spinnerFactory);
 
 		interestRate.setEditable(true);
 	
-		//topGrid.add(interestRate, 0, 13);
-		//topGrid.add(interestRateTextLabel, 0, 14);
-
 		topGrid.add(interestRate, 0, 14);
 		interestRate.setMaxWidth(400);
 		topGrid.add(interestRateTextLabel, 0, 15);

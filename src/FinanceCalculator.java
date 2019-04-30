@@ -1,11 +1,13 @@
 //package JavaFX11;
 
 import java.math.BigDecimal;
+import java.util.regex.Pattern;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -59,26 +61,30 @@ public class FinanceCalculator extends Application {
 			}
 			
 			@Override
-			protected double computeValue() {
+			protected double computeValue(){
 
 				String carPrice =view.carPriceTextField.getText();
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
 				Double interestRatevalue = view.interestRate.getValue();
 				Integer noOfMonthsvalue = view.noOfMonths.getValue();
-
-
+				double carPriceDouble = 0.00;
+				double  tradeInDownPaymentDouble = 0.00;
+				
 				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty()) {
 
-					double carPriceDouble = Double.parseDouble(carPrice);
-					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+					if (numberCheck(carPrice) ) {
+						carPriceDouble = Double.parseDouble(carPrice);
+					}
+					if (numberCheck(tradeInDownPayment) ) {
+						tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+					}
 					double principle = 0;
 					double monthly_interest_rate = 0;
 					
 					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
 					
-						principle = (carPriceDouble - tradeInDownPaymentDouble);	
-						monthly_interest_rate = ((interestRatevalue/12)/100);
-															
+						principle = (carPriceDouble - tradeInDownPaymentDouble);
+						monthly_interest_rate = ((interestRatevalue/12)/100);															
 						
 					} 
 
@@ -109,16 +115,22 @@ public class FinanceCalculator extends Application {
 					String monthly_payment = view.monthlyPaymentAmountLabel.getText();
 					double monthly_payment_double = Double.parseDouble(monthly_payment);
 					Double interestRatevalue = view.interestRate.getValue();
-
+					
 					String carPrice =view.carPriceTextField.getText();
 					String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
-					
+					double carPriceDouble = 0.00;
+					double  tradeInDownPaymentDouble = 0.00;
 					double total_interest_paid = 0;
 					
+				
 					if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() ) {
 						
-						double carPriceDouble = Double.parseDouble(carPrice);
-						double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+						if (numberCheck(carPrice) ) {
+							carPriceDouble = Double.parseDouble(carPrice);
+						}
+						if (numberCheck(tradeInDownPayment) ) {
+							tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+						}
 						double principle = 0;
 						
 						if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
@@ -127,7 +139,7 @@ public class FinanceCalculator extends Application {
 						total_interest_paid = (monthly_payment_double * noOfMonthsvalue) - principle;
 					}
 					
-					if (interestRatevalue == 0)
+					if ( interestRatevalue == 0)
 					{
 						return monthly_payment_double * noOfMonthsvalue - total_interest_paid;
 					}
@@ -182,12 +194,18 @@ public class FinanceCalculator extends Application {
 				String tradeInDownPayment = view.tradeInDownPaymentTextField.getText();
 				String total_amount_paid = view.totalAmountLabel.getText();
 				double total_amount_paid_double = Double.parseDouble(total_amount_paid);
+				double carPriceDouble = 0.00;
+				double  tradeInDownPaymentDouble = 0.00;
 				double principle = 0;
 				
 				if (  !carPrice.isEmpty() && !tradeInDownPayment.isEmpty() ) {
 					
-					double carPriceDouble = Double.parseDouble(carPrice);
-					double  tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+					if (numberCheck(carPrice) ) {
+						carPriceDouble = Double.parseDouble(carPrice);
+					}
+					if (numberCheck(tradeInDownPayment) ) {
+						tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
+					}
 					
 					
 					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
@@ -201,6 +219,42 @@ public class FinanceCalculator extends Application {
 		};
 		
 		//bind totalAmountPaidBinding to realtimeBMILable
-		view.totalInterestLabel.textProperty().bind(Bindings.format("%.2f", totalInterestPaidBinding));			
+		view.totalInterestLabel.textProperty().bind(Bindings.format("%.2f", totalInterestPaidBinding));				
+		  
 	}
+	// Check if a given string is valid double
+	// Function taken from Oracle docs
+	public boolean numberCheck(String input){
+	  final String Digits = "(\\p{Digit}+)";
+	  final String HexDigits = "(\\p{XDigit}+)";
+	  // an exponent is 'e' or 'E' followed by an optionally
+	  // signed decimal integer.
+	  final String Exp = "[eE][+-]?" + Digits;
+	  final String fpRegex =
+	          ("[\\x00-\\x20]*" +  // Optional leading "whitespace"
+	                  "[+-]?(" + // Optional sign character
+	                  "NaN|" +           // "NaN" string
+	                  "Infinity|" +      // "Infinity" string
+
+	                  // Digits ._opt Digits_opt ExponentPart_opt FloatTypeSuffix_opt
+	                  "(((" + Digits + "(\\.)?(" + Digits + "?)(" + Exp + ")?)|" +
+
+	                  // . Digits ExponentPart_opt FloatTypeSuffix_opt
+	                  "(\\.(" + Digits + ")(" + Exp + ")?)|" +
+
+	                  // Hexadecimal strings
+	                  "((" +
+	                  // 0[xX] HexDigits ._opt BinaryExponent FloatTypeSuffix_opt
+	                  "(0[xX]" + HexDigits + "(\\.)?)|" +
+
+	                  // 0[xX] HexDigits_opt . HexDigits BinaryExponent FloatTypeSuffix_opt
+	                  "(0[xX]" + HexDigits + "?(\\.)" + HexDigits + ")" +
+
+	                  ")[pP][+-]?" + Digits + "))" +
+	                  "[fFdD]?))" +
+	                  "[\\x00-\\x20]*");// Optional trailing "whitespace"
+
+	  return Pattern.matches(fpRegex, input);
+	}
+	  
 }
