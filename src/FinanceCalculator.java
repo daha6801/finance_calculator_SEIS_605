@@ -30,40 +30,6 @@ public class FinanceCalculator extends Application {
 		primaryStage.show();
 	}
 	
-	public boolean numberCheck(String input) {  
-	    final String Digits = "(\\p{Digit}+)";
-	    final String HexDigits = "(\\p{XDigit}+)";
-	  // an exponent is 'e' or 'E' followed by an optionally
-	  // signed decimal integer.
-	    final String Exp = "[eE][+-]?" + Digits;
-	    final String fpRegex =
-	          ("[\\x00-\\x20]*" +  // Optional leading "whitespace"
-	                  "[+-]?(" + // Optional sign character
-	                  "NaN|" +           // "NaN" string
-	                  "Infinity|" +      // "Infinity" string
-
-	                  // Digits ._opt Digits_opt ExponentPart_opt FloatTypeSuffix_opt
-	                  "(((" + Digits + "(\\.)?(" + Digits + "?)(" + Exp + ")?)|" +
-
-	                  // . Digits ExponentPart_opt FloatTypeSuffix_opt
-	                  "(\\.(" + Digits + ")(" + Exp + ")?)|" +
-
-	                  // Hexadecimal strings
-	                  "((" +
-	                  // 0[xX] HexDigits ._opt BinaryExponent FloatTypeSuffix_opt
-	                  "(0[xX]" + HexDigits + "(\\.)?)|" +
-
-	                  // 0[xX] HexDigits_opt . HexDigits BinaryExponent FloatTypeSuffix_opt
-	                  "(0[xX]" + HexDigits + "?(\\.)" + HexDigits + ")" +
-
-	                  ")[pP][+-]?" + Digits + "))" +
-	                  "[fFdD]?))" +
-	                  "[\\x00-\\x20]*");// Optional trailing "whitespace"
-
-	    return Pattern.matches(fpRegex, input);
-		
-   }
-
 	void setupActions() {
 		
 		//bind itemsComboBox with data
@@ -127,22 +93,15 @@ public class FinanceCalculator extends Application {
 					{
 						return principle/noOfMonthsvalue;
 					}
-					if(numberCheck(carPrice))
-					{
-						view.carPriceTextField.setEditable(false); 
-					}
 					return principle * monthly_interest_rate * (Math.pow(1 + monthly_interest_rate, noOfMonthsvalue))/(Math.pow(1 + monthly_interest_rate, noOfMonthsvalue)-1);
 				} else
 				return 0;
-				
-				
-						
+
 		  }
 			
 		};
 		
-		
-		
+			
 		//bind monthlyPaymentBinding to monthlyPaymentAmountLabel
 		view.monthlyPaymentAmountLabel.textProperty().bind(Bindings.format("%.2f", monthlyPaymentBinding));
 						
@@ -250,8 +209,7 @@ public class FinanceCalculator extends Application {
 					if (numberCheck(tradeInDownPayment) ) {
 						tradeInDownPaymentDouble = Double.parseDouble(tradeInDownPayment);
 					}
-					
-					
+
 					if (carPriceDouble > 0.0 && tradeInDownPaymentDouble >= 0.0) {
 						principle = (carPriceDouble - tradeInDownPaymentDouble);	
 					}												
